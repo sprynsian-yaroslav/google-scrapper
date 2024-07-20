@@ -1,0 +1,158 @@
+.custom-table {
+  border: 1px solid whitesmoke;
+  border-radius: 8px;
+  caption-side: unset;
+  border-collapse: unset;
+  width: 100%;
+
+  tr {
+    &:last-child {
+      td {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  th,
+  td {
+    margin: 0;
+    padding: 0.5rem;
+    border-bottom: 1px solid whitesmoke;
+
+    &:last-of-type {
+      border-right: none;
+    }
+  }
+}
+
+body .react-table {
+  thead {
+    height: 44px;
+
+    tr {
+      border: none;
+    }
+
+    tr th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 20px;
+      color: #495057;
+      border: none;
+      white-space: nowrap;
+    }
+  }
+
+  tbody tr {
+  }
+
+  tbody td {
+    padding-top: 12px;
+    height: 44px;
+    border: none;
+    border-bottom: 1px solid #f2f2f2;
+    padding-bottom: 12px;
+
+    .div-cell {
+      white-space: nowrap;
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .table-spinner {
+    padding-top: 28vh;
+    height: 56vh;
+    display: table-caption;
+    caption-side: bottom;
+    width: 80vw;
+    text-align: center;
+  }
+
+  .simple-table-spinner {
+    padding-top: unset;
+    height: unset;
+    display: table-caption;
+    caption-side: bottom;
+    width: 80vw;
+    text-align: center;
+  }
+
+  .table-collapse {
+    display: table-caption;
+    caption-side: bottom;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+body .active-sort-icon {
+  path {
+    fill: #495057;
+  }
+}
+
+body .table-expand-icon {
+  height: 8px;
+  width: 11px;
+  margin-left: 13px;
+
+  path {
+    fill: #74788d;
+  }
+}
+
+body .table-search {
+  &__search {
+    position: relative;
+
+    input {
+      border-radius: 50px;
+      height: 36px;
+      padding: 8px 30px 8px 40px;
+    }
+
+    i.search-icon {
+      position: absolute;
+      top: 10px;
+      left: 13px;
+      font-size: 16px;
+    }
+
+    i.reset-icon {
+      position: absolute;
+      top: 11px;
+      right: 12px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+}
+
+.table-item-avatar {
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+body .table-item-avatar-bg {
+  background-color: rgba(85, 110, 230, 0.2);
+
+  span {
+    color: #556ee6;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
+
+body .table-cell-25 {
+  max-width: 25vw;
+}
+

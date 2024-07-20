@@ -1,0 +1,98 @@
+{
+  "name": "skote-react-hook",
+  "version": "2.0.0",
+  "private": true,
+  "dependencies": {
+    "@ckeditor/ckeditor5-build-decoupled-document": "^35.1.0",
+    "@ckeditor/ckeditor5-react": "^5.0.2",
+    "@storyblok/react": "^2.4.7",
+    "axios": "^0.27.2",
+    "bootstrap": "^5.1.3",
+    "classnames": "^2.3.1",
+    "dotenv": "^16.0.1",
+    "env-cmd": "^10.1.0",
+    "formik": "^2.2.9",
+    "i18n-react": "^0.7.0",
+    "lodash": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
+    "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.5.0",
+    "lodash.set": "^4.3.2",
+    "luxon": "^3.0.4",
+    "metismenujs": "^1.3.1",
+    "node-sass": "^7.0.1",
+    "papaparse": "^5.4.1",
+    "prop-types": "^15.8.1",
+    "query-string": "^7.1.1",
+    "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-cropper": "^2.1.8",
+    "react-datepicker": "^4.8.0",
+    "react-dom": "^18.2.0",
+    "react-draft-wysiwyg": "^1.15.0",
+    "react-dropzone": "^14.2.2",
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.2.2",
+    "react-google-recaptcha": "^2.1.0",
+    "react-input-mask": "^2.0.4",
+    "react-meta-tags": "^1.0.1",
+    "react-perfect-scrollbar": "^1.5.8",
+    "react-rangeslider": "^2.2.0",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
+    "react-select": "^5.4.0",
+    "react-share": "^5.0.2",
+    "react-star-ratings": "^2.3.0",
+    "react-switch": "^7.0.0",
+    "react-table": "7.8.0",
+    "react-toastify": "^9.0.6",
+    "reactstrap": "^9.1.2",
+    "redux": "^4.2.0",
+    "redux-saga": "^1.1.3",
+    "sanitize-html": "^2.7.2",
+    "simplebar-react": "^2.4.1",
+    "storyblok-js-client": "^6.1.0",
+    "swiper": "^10.2.0",
+    "uuid": "^9.0.0",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.30.1",
+    "husky": "^8.0.1",
+    "plop": "^3.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build ",
+    "lint": "eslint .",
+    "cli": "plop",
+    "format": "prettier --write \"**/*.{js,jsx,json,md,html,css,less,scss}\"",
+    "build:dev": "env-cmd -f ./.env.dev npm run build",
+    "start:dev": "env-cmd -f ./.env.dev npm run start",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "docs": "npx styleguidist server",
+    "pretest": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run pretest"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

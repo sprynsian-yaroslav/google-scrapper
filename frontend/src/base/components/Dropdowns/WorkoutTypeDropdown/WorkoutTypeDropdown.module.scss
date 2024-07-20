@@ -1,0 +1,18 @@
+.ItemsWrapper {
+  max-height: 180px;
+  overflow-y: scroll;
+}
+
+
+.Item {
+  padding: 7px 16px;
+
+  &:hover {
+    background-color: #F8F9FA;
+  }
+
+  &.Active {
+    background-color: #556ee6;
+    color: #ffffff;
+  }
+}

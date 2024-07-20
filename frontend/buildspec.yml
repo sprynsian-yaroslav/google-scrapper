@@ -1,0 +1,22 @@
+
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - echo Installing
+  pre_build:
+    commands:
+      - npm install
+      - chmod +x ./scripts/config_generator.sh
+      - echo Generating config
+      - sh ./scripts/config_generator.sh
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling the Node.js code
+      - npm run build
+  post_build:
+    commands:
+      - aws s3 sync ./build $S3_BUCKET

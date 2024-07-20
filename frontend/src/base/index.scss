@@ -1,0 +1,105 @@
+.table-placeholder{
+    height: pxToRem(350);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    
+    &__title{
+      color: #74788D;
+      font-size: pxToRem(16);
+      font-weight: 600;
+      margin-bottom: pxToRem(38);
+    }
+  
+    &__image{
+      height: xToRem(172);
+      width: pxToRem(176);
+    }
+}
+
+.react-bs-table-no-data:hover{
+    background-color: $white;
+    box-shadow: none;
+}
+
+.w-20 {
+  width: 20%!important;
+}
+
+.w-21 {
+  width: 21%!important;
+}
+
+.ps-5px {
+  padding-left: 5px!important;
+}
+
+.ps-20px {
+  padding-left: 20px!important;
+}
+
+.ps-26px {
+  padding-left: 26px!important;
+}
+
+.ps-35rem {
+  padding-left: 0.35rem !important;
+}
+
+$lab-result-status-map: (
+  "pending": #74788D,
+  "new": #34C38F,
+  "inProgress": #F1B44C,
+  "error": #F46A6A,
+  "verified": #50A5F1,
+  "canceled": #495057,
+  "rejected": #F46A6A,
+);
+
+@each $name, $color in $lab-result-status-map {
+  .lab-result-status-tag-#{$name} {
+    background-color: #{$color}2E;
+    color: $color;
+    text-align: center;
+    border-radius: 4px;
+    padding: 0px 4px 0px 4px;
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 10px;
+  }
+}
+
+.small-modal {
+  .modal-content {
+    max-height: 60% !important;
+  }
+}
+
+.w-95 {
+  width: 95%;
+}
+
+.h-60 {
+  height: 60%;
+}
+
+$status-map: (
+        "Active": #34C38F,
+        "Inactive": #F1B44C,
+);
+
+@each $name, $color in $status-map {
+  .status-tag-#{$name} {
+    background-color: #{$color}2E;
+    color: $color;
+    text-align: center;
+    border-radius: 4px;
+    padding: 0px 4px 0px 4px;
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 10px;
+    width: fit-content;
+  }
+}

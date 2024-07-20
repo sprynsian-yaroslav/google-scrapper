@@ -1,0 +1,117 @@
+@import "../../variables";
+
+.editor-container {
+  margin-top: 24px;
+
+  &__label {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    color: #495057;
+    margin-bottom: 4px;
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    color: #495057;
+    margin-bottom: 12px;
+  }
+
+  &.editor-invalid {
+    .ck.ck-editor__editable_inline {
+      border: 1px solid #f46a6a !important;
+      border-top: none !important;
+    }
+
+    .ck.ck-toolbar {
+      border: 1px solid #f46a6a;
+      border-bottom: none;
+    }
+  }
+}
+
+body .rich-text-p-tag > * {
+  margin-bottom: 0;
+  color: #74788D;
+  word-break: break-word;
+}
+
+body .ck.ck-toolbar {
+  border: 1px solid transparent;
+  background-color: #EFF2F6 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+body .ck.ck-balloon-panel{
+  z-index: 1100;
+  span.ck.ck-tooltip__text{
+    color: white!important;
+  }
+}
+
+body .ck.ck-editor__editable_inline {
+  border: 1px solid #CED4DA;
+  border-top: none;
+  border-radius: 0 0 4px 4px !important;
+}
+
+.ck.ck-editor__editable_inline > p {
+  margin-bottom: 0;
+}
+
+.ck.ck-editor__main > .ck-editor__editable {
+  border-color: $gray-300 !important;
+  box-shadow: none !important;
+}
+
+body .ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
+  border: 1px solid #CED4DA;
+  border-top: none;
+  box-shadow: none !important;
+  border-radius: 0 0 4px 4px !important;
+}
+
+.ck.ck-dropdown__panel,
+.ck.ck-list {
+  background: $dropdown-bg !important;
+  border: 1px solid $dropdown-border-color !important;
+}
+
+.ck-editor__editable {
+  min-height: 80px !important;
+}
+
+.ck.ck-toolbar.ck-toolbar_grouping > .ck-toolbar__items {
+  flex-wrap: wrap !important;
+}
+
+.ck.ck-editor__main > .ck-editor__editable {
+  background-color: $card-bg !important;
+}
+
+.ck.ck-reset_all,
+.ck.ck-reset_all * {
+  color: $gray-600 !important
+}
+
+.ck.ck-toolbar .ck.ck-toolbar__separator {
+  background: transparent !important;
+}
+
+.ck.ck-button.ck-on,
+a.ck.ck-button.ck-on,
+.ck.ck-button:not(.ck-disabled):hover,
+a.ck.ck-button:not(.ck-disabled):hover {
+  background: $gray-200 !important;
+}
+
+body .ck.ck-button.ck-on {
+  svg {
+    path {
+      fill: #2977ff;
+    }
+  }
+}

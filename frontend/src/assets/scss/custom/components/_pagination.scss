@@ -1,0 +1,30 @@
+// 
+// _pagination.scss
+// 
+
+// Pagination rounded (Custom)
+.pagination-rounded {
+  display: flex;
+  flex-direction: row;
+
+  .page-link {
+    border-radius: 30px !important;
+    margin: 0 3px !important;
+    border: none;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    text-align: center;
+    line-height: 32px;
+  }
+
+  .active{
+    color: #fff;
+    background-color: #556ee6;
+    border-color: #556ee6;
+  }
+
+  &__select {
+    max-width: 100px;
+  }
+}

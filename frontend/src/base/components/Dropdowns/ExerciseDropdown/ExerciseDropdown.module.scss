@@ -1,0 +1,23 @@
+.ItemsWrapper {
+  max-height: 180px;
+  overflow-y: scroll;
+}
+
+
+.Slide {
+  background-color: transparent;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #CED4DA;
+  color: #CED4DA;
+  padding: 7px 16px;
+  font-weight: 500;
+  font-size: 13px;
+  width: 100%;
+
+  &.Active {
+    border-bottom: 1px solid #556ee6;
+    color: #556ee6;
+  }
+}

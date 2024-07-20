@@ -1,0 +1,56 @@
+body .upload-manually {
+  display: grid;
+  grid-template-columns: 20px 1fr 0.35fr 0.35fr;
+  grid-column-gap: 16px;
+  margin: 10px 0;
+  padding-left: 10px;
+
+  &__container{
+    min-height: 80vh;
+  }
+
+  &__popup{
+    width: 100% !important;
+  }
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+  }
+
+  &--header {
+    height: 56px;
+    padding: 18px 18px 18px 10px;
+    background-color: #F8F8FB;
+    margin-top: 16px;
+  }
+
+  &__disabled-icon {
+    path {
+      stroke: #CED4DA;
+    }
+  }
+
+  &__checkbox {
+    margin-top: 35px;
+  }
+
+  .border-error {
+    border: 1px solid #f46a6a;
+  }
+}
+
+
+.margin-for-error {
+  margin-bottom: 20px;
+}
+
+.custom-select {
+  & > div:first-of-type {
+    height: 36px;
+    min-height: 36px;
+  }
+}

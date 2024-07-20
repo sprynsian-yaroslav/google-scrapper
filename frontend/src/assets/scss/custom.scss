@@ -1,0 +1,409 @@
+@import "variables";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body .button-spinner {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.select-none {
+  user-select: none;
+}
+
+.noti-icon .badge {
+  left: 23px;
+}
+
+.dataTables_filter,
+.dataTables_paginate {
+  float: right;
+}
+
+.rdw-editor-main {
+  border: 1px solid #eeeef5;
+  height: 239px;
+}
+
+.dz-message {
+  text-align: center;
+  padding: 100px;
+}
+
+.fcYNFc {
+  background-color: #ffffff !important;
+}
+
+.task-box {
+  border: 1px solid #e1e1e6;
+}
+
+.react-datepicker-wrapper {
+  width: 100% !important;
+}
+
+.ReactModal__Overlay {
+  z-index: 1001 !important;
+}
+
+.fc-event .fc-content {
+  padding: 5px;
+  color: #fff;
+}
+
+.chat-conversation .right .conversation-list {
+  margin-right: 15px;
+}
+
+.external-event {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+body .rangeslider-horizontal {
+  background: linear-gradient(270deg, #59CBA1 0%, #FFFFFF 52.27%, #F28484 100%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  .rangeslider__fill {
+    background-color: transparent;
+    border-radius: 15px;
+  }
+}
+
+.divider {
+  height: 1px;
+  border-bottom: 1px solid #F2F2F2;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.no-outline {
+  outline: none !important;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.w-90 {
+  width: 90% !important;
+}
+
+.w-fit-content {
+  width: fit-content !important;
+}
+
+.mh-100 {
+  height: 100vh;
+}
+
+.vh-50 {
+  height: 50vh !important;
+}
+
+.vh-75 {
+  height: 75vh !important;
+}
+
+.visibility-hidden {
+  visibility: hidden !important;
+}
+
+.font-weight-normal {
+  font-weight: 400 !important;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+  transition: 0.3s ease;
+}
+
+.rotate-360 {
+  transform: rotate(0);
+  transition: 0.3s ease;
+}
+
+body .pointer-events {
+  pointer-events: auto !important;
+}
+
+body .align-right {
+  text-align: right;
+}
+
+body .select-invalid > div:first-of-type {
+  border: 1px solid #f46a6a;
+}
+
+body .pointer-events-none {
+  pointer-events: none;
+}
+
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #CED4DA;
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #74788D;
+  }
+}
+
+.word-break {
+  word-break: break-word !important;
+}
+
+body .text-yellow {
+  color: #FDE71F;
+}
+
+body section.border-error {
+  border: 1px solid #f46a6a !important;
+}
+
+.nav-tabs > li > a {
+  color: #74788D;
+}
+
+.disabled-pagination {
+  color: #CED4DA
+}
+
+.deactivated-pill {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+  background-color: rgba(241, 180, 76, 0.18);
+  border-radius: 4px;
+  color: #F1B44C;
+  padding: 0 4px;
+}
+
+.inactivated-pill {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+  background-color: #F46A6A2E;
+  border-radius: 4px;
+  color: #F46A6A;
+  padding: 0 4px;
+}
+
+.active-pill {
+  background-color: rgba(52, 195, 143, 0.18);
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+  color: #34C38F;
+  padding: 0 4px;
+}
+
+.study-link-width {
+  width: 345px;
+  margin-left: 28px;
+}
+
+.opacity-30 {
+  opacity: 0.3;
+}
+
+.cursor-default {
+  cursor: default !important;
+}
+
+.outline-none {
+  outline: none !important;
+}
+
+.line-clamp-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: pre-line;
+}
+
+.active-arrow {
+  .has-arrow {
+    &:after {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+body div.margin-bottom-0{
+  margin-bottom: 0!important;
+}
+
+.min-w-1-4 {
+  min-width: 25%;
+}
+
+.min-w-1-5 {
+  min-width: 20%;
+}
+
+.h-82 {
+  height: 82%;
+}
+
+.top-m-15 {
+  top: -15px;
+}
+
+.p-relative {
+  position: relative;
+}
+
+.biomarker-range-arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  
+  border-top: 10px solid black;
+}
+
+.view-files {
+  color: #556ee6;
+  position: absolute;
+  right: 23px;
+  bottom: 23px;
+}
+
+$biomarker-range-red: #ff3c00;
+$biomarker-range-yellow: #fbe754;
+$biomarker-range-orange: #ff7f00;
+$biomarker-range-green: #00c56f;
+
+.biomarker-range-red {
+  background-color: $biomarker-range-red;
+}
+.biomarker-range-green {
+  background-color: $biomarker-range-green;
+}
+.biomarker-range-yellow {
+  background-color: $biomarker-range-yellow;
+}
+.biomarker-range-orange {
+  background-color: $biomarker-range-orange;
+}
+
+.biomarker-range-red-text {
+  color: $biomarker-range-red;
+}
+.biomarker-range-green-text {
+  color: $biomarker-range-green;
+}
+.biomarker-range-yellow-text {
+  color: $biomarker-range-yellow;
+}
+.biomarker-range-orange-text {
+  color: $biomarker-range-orange;
+}
+
+.opacity-20 {
+  opacity: 20%;
+}
+
+.w-10 {
+  width: 10%;
+}
+
+.h-12px {
+  height: 12px;
+}
+
+.biomarker-range-label {
+  color: #74788D;
+  margin-left: -5px;
+}
+
+.biomarker-range-title {
+  color: $gray-700;
+}
+
+.f-10px {
+  font-size: 10px;
+}
+
+.csvViewerModal {
+  width: 880px;
+  max-width: 880px;
+
+  &.foodIntoleranceModal {
+    width: 900px;
+    max-width: 900px;
+  }
+
+  .modal-content {
+    height: 90vh;
+    overflow: hidden;
+  }
+  .table-spinner{
+    width: 100% !important;
+  }
+
+  .uploaded-tag{
+    font-size: 13px;
+  }
+  .uploaded-val{
+    font-size: 13px;
+    font-weight: 100;
+  }
+
+  .meta-table, .food-table, .dna-table {
+    tbody {
+      td {
+        background-color: white;
+      }
+    }
+  }
+
+  .meta-table {
+    height: 25vh;
+  }
+  .food-table, .dna-table {
+    height: 50vh;
+  }
+}
+
+.button-icon {
+  width: 16px;
+  height: 16px;
+
+  path {
+    stroke: currentColor;
+  }
+}
+
+.bg-light-gray {
+  background: #EFF2F6 !important;
+}
+
+.min-h-auto {
+  min-height: auto!important;
+}
+
+.form-control {
+  min-height: 38px;
+}

@@ -1,0 +1,27 @@
+{
+  "BUTTONS": {
+    "SUBMIT": "Submit"
+  },
+  "SIDEBAR": {
+    "DASHBOARD": "Dashboard",
+    "BIOMARKERS": "Biomarkers",
+    "FOOD_INTOLERANCE": "Food Intolerance",
+    "RECOMMENDATIONS": "Recommendations",
+    "CUSTOMER_MANAGEMENT": "Customer management",
+    "CUSTOMER_RESULTS": "Customers result",
+    "CONTENT_PLAYGROUND": "Content Playground",
+    "CONTENT": "Content",
+    "PROGRAMS": "Programs",
+    "FOOD_AND_RECIPES": "Food & Recipes",
+    "USER_SEGMENTS": "User Segments",
+    "FITNESS": "Fitness"
+  },
+  "ERROR_MESSAGES": {
+    "REQUIRED": "{label} is required",
+    "EMAIL": "Email is invalid",
+    "TRIM": "Cannot contain spaces only",
+    "MIN": "Should be more than {{min}}",
+    "MAX": "Should be less than {{max}}",
+    "TYPE_ERROR": "{label} is invalid"
+  }
+}

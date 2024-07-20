@@ -1,0 +1,135 @@
+// 
+// authentication.scss
+//
+
+
+// authentication home icon
+.home-btn {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+}
+
+// auth 2
+
+.auth-logo {
+  .auth-logo-dark {
+    display: $display-block;
+  }
+
+  .auth-logo-light {
+    display: $display-none;
+  }
+}
+
+.auth-body-bg {
+  background-color: $card-bg;
+}
+
+body .logo-bg {
+  background-color: #FFFFFF;
+  border: 1px solid #D5DBF9;
+}
+
+body .form-control.is-invalid.without-error-icon {
+  background-image: none;
+  padding-right: 12px;
+}
+
+body .input-eye-option {
+  position: absolute;
+  top: 37px;
+  right: 13px;
+  cursor: pointer;
+  height: 18px;
+  width: 26px;
+
+  path {
+    fill: #495057;
+  }
+}
+
+.auth-header {
+  height: 95px;
+}
+
+// auth-pass-inputgroup
+
+.auth-pass-inputgroup {
+  input[type="input"] + .btn .mdi-eye-outline {
+    &:before {
+      content: "\F06D1";
+    }
+  }
+}
+
+// authentication full page
+
+.auth-full-bg {
+  background-color: rgba($primary, 0.25);
+  display: flex;
+
+  @media (min-width: 1200px) {
+    height: 100vh;
+  }
+
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+  }
+
+  .bg-overlay {
+    background: url("../../../images/bg-auth-overlay.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.auth-full-page-content {
+  display: flex;
+
+  @media (min-width: 1200px) {
+    min-height: 100vh;
+  }
+}
+
+.auth-review-carousel {
+  &.owl-theme {
+    .owl-dots {
+      .owl-dot {
+        span {
+          background-color: rgba($primary, 0.25);
+        }
+
+        &.active, &:hover {
+          span {
+            background-color: $primary;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+body .link-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 12px;
+  min-width: 16px;
+
+  path {
+    fill: #6A7187;
+  }
+
+  &.active {
+    path {
+      fill: #FFFFFF;
+    }
+  }
+}

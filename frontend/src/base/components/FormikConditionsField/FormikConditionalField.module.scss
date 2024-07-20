@@ -1,0 +1,88 @@
+$color-gray-light: #CED4DA;
+$border-style: 1px dashed $color-gray-light;
+$width-field-label: 40px;
+$gap-between-fields: 8px;
+$width-operator-field: 64px;
+
+$level-padding: 48px;
+
+
+.ConditionsFieldsRow {
+  display: flex;
+  align-items: center;
+  gap: $gap-between-fields;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  padding-right: 40px;
+  position: relative;
+
+  .Label {
+    flex: 0 0 $width-field-label;
+    margin-bottom: 0;
+    background-color: inherit;
+  }
+
+  .Fields {
+    flex: 1 1 calc(100% - #{$width-field-label} - #{$gap-between-fields});
+    display: flex;
+    align-items: center;
+    gap: $gap-between-fields;
+
+    .OperatorField {
+      width: $width-operator-field;
+    }
+
+    .ValueField {
+      width: calc(100% - #{$width-operator-field} - #{$gap-between-fields});
+    }
+  }
+
+  .TrashIcon {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+}
+
+
+.RelationLineBlock {
+  width: $level-padding;
+  position: absolute;
+  top: 18px;
+  left: 0;
+
+  .TopLine {
+    border-left: $border-style;
+    border-bottom: $border-style;
+    height: 145px;
+    margin-left: -$level-padding;
+
+    &.First {
+      border: none;
+    }
+
+    &.Last {
+      border: none;
+    }
+
+    &.Collapse {
+      height: 94px;
+    }
+  }
+
+  .BottomLine {
+    border-left: $border-style;
+    border-bottom: $border-style;
+    height: 66px;
+
+    &.First {
+      border-top: $border-style;
+    }
+
+    &.Last {
+      border: none;
+    }
+  }
+}

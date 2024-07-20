@@ -1,0 +1,118 @@
+@mixin borderAnimation() {
+  background-image: linear-gradient(90deg, #CED4DA 50%, transparent 50%),
+  linear-gradient(90deg, #CED4DA 50%, transparent 50%),
+  linear-gradient(0deg, #CED4DA 50%, transparent 50%),
+  linear-gradient(0deg, #CED4DA 50%, transparent 50%);
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: 8px 2px, 8px 2px, 2px 8px, 2px 8px;
+  background-position: left top, right bottom, left bottom, right top;
+  animation: animatedDash 300ms infinite linear;
+}
+
+@keyframes animatedDash {
+  0% {
+    background-position: left top, right bottom, left bottom, right top;
+  }
+  100% {
+    background-position: left 8px top, right 8px bottom, left bottom 8px, right top 8px;
+  }
+}
+
+body .dropzone-file {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px dashed #CED4DA;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 4px;
+
+  &.drag-danger {
+    border: 2px dashed #E74C3C;
+  }
+
+  .upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .cloud {
+      font-size: 46px;
+      margin-bottom: 20px;
+      margin-top: 40px;
+      color: #74788D;
+    }
+
+    &--section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &__title {
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 22px;
+        color: #495057;
+      }
+
+      &__desc {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        text-align: center;
+        color: #74788D;
+        margin-bottom: 30px;
+      }
+
+      &__cloud-upload-desc {
+        font-weight: 500;
+        font-size: 19px;
+        line-height: 28px;
+        text-align: center;
+        color: #495057;
+        margin-bottom: 30px;
+        max-width: 260px;
+      }
+    }
+  }
+
+  .choose-file {
+    display: inline-block;
+    background-color: #e1e1e1;
+    font-size: 0.8125rem;
+    color: #495057;
+    padding: 0.1875rem 0.5rem;
+    border-radius: 4px;
+    border: solid 1px #e1e1e1;
+    outline: none;
+    cursor: pointer;
+  }
+
+  &.drag-active {
+    border: none;
+    padding: 2px;
+    @include borderAnimation();
+  }
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #CED4DA;
+  border-radius: 4px;
+  padding: 16px;
+
+  .image{
+    object-fit: contain;
+    width: 50px;
+    height: 50px;
+    margin-right: 24px;
+    border-radius: 4px;
+  }
+
+  label{
+    max-width: 25vw;
+  }
+}
+

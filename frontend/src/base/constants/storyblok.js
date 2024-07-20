@@ -1,0 +1,1 @@
+export const SERVICE_BLOK_FIELDS = [ "_uid", "component", "_editable" ]

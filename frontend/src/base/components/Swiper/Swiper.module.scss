@@ -1,0 +1,23 @@
+.BtnArrow {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #BFCAC8;
+  background-color: white;
+  border-radius: 50%;
+}
+
+
+.BtnArrowRight {
+  right: 0;
+}
+
+.BtnArrowLeft {
+  left: 0;
+}
