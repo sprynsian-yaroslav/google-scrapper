@@ -28,7 +28,7 @@ const Header = () => {
       <header id="page-topbar">
         <div className="navbar-header">
           <div className="d-flex">
-            <div className="navbar-brand-box">
+            <div>
               <Link to="/" className="logo logo-light">
                 <span className="logo-lg">
                   <img alt="logo" style={{maxHeight: '50px'}}/>

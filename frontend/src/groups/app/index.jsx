@@ -3,18 +3,20 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import React from "react";
 import ErrorBoundary from "../../base/components/ErrorBoundary";
 import { APP_GROUP_LINKS, APP_GROUP_ROUTES } from "./config";
-import UserSegments from "./UserSegments";
+import Keywords from "./Keywords";
 
 
 const AppRoutes = () => {
+
+    console.log("dwadawdw")
 
   return (
     <VerticalLayout>
       <ErrorBoundary>
         <Routes>
-          <Route path={APP_GROUP_ROUTES.USER_SEGMENTS} element={<UserSegments />}/>
+          <Route path={APP_GROUP_ROUTES.KEYWORDS} element={<Keywords />}/>
 
-          <Route path="/" element={<Navigate to={APP_GROUP_LINKS.USER_SEGMENTS}/>}/>
+          <Route path="/" element={<Navigate to={APP_GROUP_LINKS.KEYWORDS}/>}/>
         </Routes>
       </ErrorBoundary>
     </VerticalLayout>

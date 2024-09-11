@@ -1,82 +1,47 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Render,
-  Req,
-  Res,
-  UsePipes,
-} from '@nestjs/common';
-import { Request, Response } from 'express';
+import {Controller, Get, Post, Body, Param, Delete, UseGuards, Query} from '@nestjs/common';
 import { KeywordsService } from './keywords.service';
-import { CreateKeywordDto } from './dto/create-keyword.dto';
-import { CustomValidationPipe } from '../common/pipes';
-import { keywordsTableSchema } from '../hbs/table-schemas/keywords.table-schema';
-import { scrapingResultTableSchema } from '../hbs/table-schemas/scraping-result.table-schema';
+import { Keyword } from './keywords.entity';
+import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 
+@UseGuards(JwtAuthGuard)
 @Controller('keywords')
 export class KeywordsController {
   constructor(private readonly keywordsService: KeywordsService) {}
 
-  @Get('/')
-  @Render('keywordsList')
-  async getKeywordList(@Req() req: Request, @Res() res: Response) {
-    if (!req.session.user) {
-      return res.redirect('/login');
-    }
-
-    const keywords = await this.keywordsService.findAll();
-
-    console.log('keywords: ', keywords);
+  @Get()
+  async findAll(
+      @Query('search') search: string,
+      @Query('limit') limit = 10,
+      @Query('offset') offset = 0,
+  ): Promise<{ data: Keyword[], pagination: { totalCount: number, limit: number, offset: number } }> {
+    const [data, totalCount] = await this.keywordsService.findAll({
+      search,
+      limit: Number(limit),
+      offset: Number(offset),
+    });
 
     return {
-      keywords,
-      tableColumns: keywordsTableSchema,
+      data,
+      pagination: {
+        totalCount,
+        limit: Number(limit),
+        offset: Number(offset),
+      },
     };
   }
 
-  @Post('/')
-  @UsePipes(new CustomValidationPipe())
-  async createKeyword(
-    @Body() body: CreateKeywordDto,
-    @Req() req: Request,
-    @Res() res: Response,
-  ) {
-    if (!req.session.user) {
-      return res.redirect('/login');
-    }
-    try {
-      const newKeyword = await this.keywordsService.createKeyword(body);
-      return res.status(201).json(newKeyword);
-    } catch (error) {
-      return res.status(500).json('Server error');
-    }
+  @Get(':id')
+  findOne(@Param('id') id: string): Promise<Keyword> {
+    return this.keywordsService.findById(+id);
   }
 
-  @Get('/:id')
-  @Render('keywordDetails')
-  async getKeywordDetails(@Req() req: Request, @Res() res: Response) {
-    if (!req.session.user) {
-      return res.redirect('/login');
-    }
-
-    const keyword = await this.keywordsService.findById(req.params.id);
-
-    return {
-      keyword,
-      tableColumns: scrapingResultTableSchema,
-    };
+  @Post()
+  create(@Body() keyword: Keyword): Promise<Keyword> {
+    return this.keywordsService.create(keyword);
   }
 
-  @Get('/:id/delete')
-  async deleteKeyword(@Req() req: Request, @Res() res: Response) {
-    if (!req.session.user) {
-      return res.redirect('/login');
-    }
-
-    await this.keywordsService.delete(req.params.id);
-
-    return res.redirect('/keywords');
+  @Delete(':id')
+  remove(@Param('id') id: string): Promise<void> {
+    return this.keywordsService.remove(+id);
   }
 }

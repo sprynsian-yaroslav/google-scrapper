@@ -1,10 +1,10 @@
 
 export const APP_GROUP_ROUTES = {
-    BASE: '/',
-    USER_SEGMENTS: '/user-segments/*',
+    BASE: '/app/*',
+    KEYWORDS: '/keywords/*',
 };
 
 export const APP_GROUP_LINKS = {
-    BASE: '/',
-    USER_SEGMENTS: '/app/user-segments'
+    BASE: '/app',
+    KEYWORDS: '/app/keywords'
 };

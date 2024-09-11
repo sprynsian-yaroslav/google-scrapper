@@ -1,45 +1,52 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Keyword } from '../../types/keyword/keyword.type';
-import { CreateKeywordDto } from './dto/create-keyword.dto';
-import { UpdateKeywordDto } from './dto/update-keyword.dto';
+import {Injectable, NotFoundException} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Keyword } from './keywords.entity';
+import {UpdateKeywordDto} from "./dto/update-keyword.dto";
 
 @Injectable()
 export class KeywordsService {
   constructor(
-    @InjectModel('Keywords') private readonly keywordModel: Model<Keyword>,
+      @InjectRepository(Keyword)
+      private keywordsRepository: Repository<Keyword>,
   ) {}
 
-  async createKeyword(keyword: CreateKeywordDto): Promise<Keyword> {
-    const newKeyword = new this.keywordModel(keyword);
-    return newKeyword.save();
-  }
+  async findAll({ search, limit, offset }: { search?: string; limit: number; offset: number }): Promise<[Keyword[], number]> {
+    const query = this.keywordsRepository.createQueryBuilder('keyword');
 
-  async findAll(): Promise<Keyword[]> {
-    return this.keywordModel.find().populate('results').exec();
-  }
-
-  async findById(id: string): Promise<Keyword | null> {
-    return this.keywordModel.findById(id).populate('results').exec();
-  }
-
-  async delete(id: string): Promise<Keyword | null> {
-    const result = await this.keywordModel.deleteOne({ _id: id }).exec();
-
-    if (result.deletedCount === 1) {
-      return { id } as Keyword;
+    if (search) {
+      query.where('keyword.keyword LIKE :search', { search: `%${search}%` });
     }
-    return null;
+
+    query.skip(offset);
+    query.take(limit);
+
+    const [result, totalCount] = await query.getManyAndCount();
+
+    return [result, totalCount];
   }
 
-  updateKeywordResults(
-    id: string,
-    updateKeywordDto: UpdateKeywordDto,
-  ): Promise<Keyword | null> {
-    return this.keywordModel.findByIdAndUpdate(id, {
-      $push: { results: { $each: updateKeywordDto.savedResultIds || [] } },
-      ...updateKeywordDto,
-    });
+  findById(id: number): Promise<Keyword> {
+    return this.keywordsRepository.findOneBy({ id })
+  }
+
+  create(keyword: Keyword): Promise<Keyword> {
+    return this.keywordsRepository.save(keyword);
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.keywordsRepository.delete(id);
+  }
+
+  async update(id: number, updateKeywordDto: UpdateKeywordDto): Promise<Keyword> {
+    const keyword = await this.findById(id);
+
+    if (!keyword) {
+      throw new NotFoundException(`Keyword with ID ${id} not found`);
+    }
+
+    const updatedKeyword = { ...keyword, ...updateKeywordDto };
+
+    return this.keywordsRepository.save(updatedKeyword);
   }
 }

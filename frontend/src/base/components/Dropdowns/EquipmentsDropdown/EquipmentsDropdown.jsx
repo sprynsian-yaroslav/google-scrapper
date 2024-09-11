@@ -11,7 +11,7 @@ import Checkbox from "../../../../base/components/Checkbox";
 import { toggleSelectItem } from "../../../helpers/toggleSelectItem";
 import { useService } from "../../../hooks/useService";
 import { useLoading } from "../../../hooks/useLoading";
-import UserSegmentsService from "../../../../services/UserSegmentsService";
+import KeywordsService from "../../../../services/KeywordsService";
 
 // Styles, assets
 import classes from "./EquipmentsDropdown.module.scss";

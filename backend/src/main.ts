@@ -1,24 +1,21 @@
 import { NestFactory } from '@nestjs/core';
-import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
-import * as bodyParser from 'body-parser';
-import { sessionConfig } from "./session.config";
-import { configureHandlebars } from "./hbs/hbs-configure";
-
-
+import { ValidationPipe } from '@nestjs/common';
+import {AppDataSource} from "./data-source";
+require('dotenv').config()
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(
-    AppModule,
-  );
+  await AppDataSource.initialize();
 
-  app.use(sessionConfig);
+  const app = await NestFactory.create(AppModule);
 
-  app.use(bodyParser.urlencoded({ extended: true }));
+  // Використання валідаційного пайпу для автоматичної валідації DTO
+  app.useGlobalPipes(new ValidationPipe());
 
-  configureHandlebars(app)
+  // Налаштування CORS для дозволу запитів з інших доменів
+  app.enableCors();
 
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
+  console.log('Application is running on: ' + await app.getUrl());
 }
-
 bootstrap();

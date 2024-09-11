@@ -1,15 +1,12 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { KeywordsService } from './keywords.service';
 import { KeywordsController } from './keywords.controller';
-import { MongooseModule } from '@nestjs/mongoose';
-import { KeywordSchema } from './keywords.schema';
-import { CronService } from '../cron/cron.service';
+import { Keyword } from './keywords.entity';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Keywords', schema: KeywordSchema }]),
-  ],
-  providers: [KeywordsService, CronService],
+  imports: [TypeOrmModule.forFeature([Keyword])],
+  providers: [KeywordsService],
   controllers: [KeywordsController],
   exports: [KeywordsService],
 })

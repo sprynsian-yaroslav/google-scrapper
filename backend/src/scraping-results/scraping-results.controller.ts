@@ -1,49 +1,43 @@
-import { Controller, Get, Param, Req, Res } from '@nestjs/common';
-import { Request, Response } from 'express';
-import { KeywordsService } from '../keywords/keywords.service';
+import {Controller, Post, Get, Param, Query} from '@nestjs/common';
 import { ScrapingResultsService } from './scraping-results.service';
+import { ScrapingResult } from './scraping-result.entity';
 
-@Controller('scraping-result')
+@Controller('scraping')
 export class ScrapingResultsController {
-  constructor(
-    private readonly scrapingResultsService: ScrapingResultsService,
-    private readonly keywordsService: KeywordsService,
-  ) {}
+  constructor(private readonly scrapingResultsService: ScrapingResultsService) {}
 
-  @Get('/check/:keywordId')
-  async checkKeyword(@Req() req: Request, @Res() res: Response) {
-    if (!req.session.user) {
-      return res.redirect('/login');
-    }
+  @Post(':keywordId')
+  async scrape(@Param('keywordId') keywordId: number): Promise<{ status: string; message: string }> {
+    this.scrapingResultsService.scrapeGoogle(keywordId);
 
-    this.scrapingResultsService.scrapeGoogle(req.params.keywordId);
-
-    return res.redirect(`/keywords/${req.params.keywordId}`);
+    return {
+      status: 'Processing',
+      message: `Scraping for keyword ID ${keywordId} has started.`,
+    };
   }
 
-  @Get('/:id/toggle')
-  async toggleScheduledStatus(
-    @Param('id') id: string,
-    @Req() req: Request,
-    @Res() res: Response,
-  ) {
-    if (!req.session.user) {
-      return res.redirect('/login');
-    }
+  @Get('results/:keywordId')
+  async findAll(
+      @Param('keywordId') keywordId: number,
+      @Query('search') search: string,
+      @Query('limit') limit = 10,
+      @Query('offset') offset = 0,
+  ): Promise<{ data: ScrapingResult[], pagination: { totalCount: number, limit: number, offset: number } }> {
+    const [data, totalCount] = await this.scrapingResultsService.findByKeywordId({
+      keywordId,
+      search,
+      limit: Number(limit),
+      offset: Number(offset),
+    });
 
-    const keyword = await this.keywordsService.findById(id);
-    if (!keyword) {
-      return res.status(404).json('Keyword not found');
-    }
-
-    const action = () => this.scrapingResultsService.scrapeGoogle(id);
-
-    await this.scrapingResultsService.updateScheduledStatus(
-      id,
-      !keyword.isScheduled,
-      action,
-    );
-
-    return res.redirect(`/keywords`);
+    return {
+      data,
+      pagination: {
+        totalCount,
+        limit: Number(limit),
+        offset: Number(offset),
+      },
+    };
   }
+
 }

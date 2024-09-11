@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { CardBody, Card } from "reactstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FormikInput from "../../../../base/components/FormikInput";
 import { Formik } from "formik";
 import AuthCardContainer from "../../components/AuthCardContainer";
@@ -9,26 +9,19 @@ import AuthHeader from "../../components/Header";
 import { useService } from "../../../../base/hooks/useService";
 import AuthService from "../../../../services/AuthService";
 import { useLoading } from "../../../../base/hooks/useLoading";
-import StorageService from "../../../../services/StorageService";
 import SessionStorage from "../../../../services/SessionStorage";
-import { KEY_USER } from "../../../../base/constants/storage";
 import Button from "../../../../base/components/Button/index";
 import { BUTTON_COLORS, BUTTON_STYLES } from "../../../../base/components/Button/appearance";
 import { initialValues, validationSchema } from "./form";
-import { AUTH_GROUP_LINKS } from "../../config";
 import { MAX_PASSWORD_LENGTH } from "../../../../validation/lengthConstants";
-import { stringifyParams } from "../../../../base/hooks/useQueryString";
 import ToasterService from "../../../../services/ToastService";
+import { APP_GROUP_LINKS } from "../../../app/config";
 
 const Login = () => {
   /**
    * @type {AuthService}
    */
   const authService = useService(AuthService);
-  /**
-   * @type {StorageService}
-   */
-  const storage = useService(StorageService);
   /**
    * @type {SessionStorage}
    */
@@ -45,17 +38,15 @@ const Login = () => {
 
   const loginUser = useCallback((values) => {
     registerPromise(authService.login(values))
-      .then((data) => {
-        const { session, user } = data;
-        storage.set(KEY_USER, user);
+      .then((session) => {
         storageSession.setSession(session);
-        navigate(AUTH_GROUP_LINKS.LINK_MFA);
+        navigate(APP_GROUP_LINKS.BASE)
       })
       .catch(() => {
         toatsService.error("Incorrect credentials")
         setRequestError(true);
       })
-  }, [registerPromise, authService, storageSession, storage, navigate]);
+  }, [registerPromise, authService, storageSession, navigate]);
 
   return (
     <AuthCardContainer metaText="Login">
@@ -111,19 +102,6 @@ const Login = () => {
                 >
                   Sign In
                 </Button>
-
-                <div className="mt-4 text-center">
-                  <Link
-                    to={{
-                      pathname: AUTH_GROUP_LINKS.LINK_FORGOT_PASSWORD,
-                      search: stringifyParams({ email: encodeURIComponent(values.email) || undefined })
-                    }}
-                    className="text-muted"
-                  >
-                    <i className="mdi mdi-lock me-1 font-size-16"/>
-                    Forgot your password?
-                  </Link>
-                </div>
               </form>
             )}
           </Formik>

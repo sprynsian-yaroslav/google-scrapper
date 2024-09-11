@@ -12,7 +12,7 @@ import Checkbox from "../../../../base/components/Checkbox";
 import { toggleSelectItem } from "../../../helpers/toggleSelectItem";
 import { useService } from "../../../hooks/useService";
 import { useLoading } from "../../../hooks/useLoading";
-import UserSegmentsService from "../../../../services/UserSegmentsService";
+import KeywordsService from "../../../../services/KeywordsService";
 
 // Styles, assets
 import classes from "./UserSegmentsDropdown.module.scss";
@@ -24,9 +24,9 @@ const MIN_SEARCH_LENGTH = 3;
 
 export const UserSegmentsDropdown = ({ onChange, value = [], placeholder, label, withoutSelectAllOption = false }) => {
     /**
-     * @type {UserSegmentsService}
+     * @type {KeywordsService}
      */
-    const userSegmentsService = useService(UserSegmentsService);
+    const userSegmentsService = useService(KeywordsService);
 
     const [isOpen, updateIsOpen] = useState(false);
     const [userSegments, setUserSegments] = useState([]);

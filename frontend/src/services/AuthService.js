@@ -4,7 +4,7 @@ class AuthService extends Http {
   static $displayName = "AuthService";
 
   async login({ email, password }) {
-    return await this.post("/admins/sessions", { email, password }, { customToast: true })
+    return await this.post("/auth/login", { email, password }, { customToast: true })
   }
 
   async logout() {

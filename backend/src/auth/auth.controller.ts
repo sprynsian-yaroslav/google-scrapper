@@ -1,37 +1,35 @@
-import { Controller, Get, Post, Req, Res, Render, Body } from "@nestjs/common";
-import { Request, Response } from 'express';
-import { UsersService } from '../users/users.service';
-import { User } from "../../types/user/user.type";
+import {Controller, Post, Body, UseGuards, Request, HttpException, HttpStatus} from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { User } from '../users/users.entity';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private usersService: UsersService) {}
-
-  @Get('login')
-  @Render('login')
-  getLogin(@Req() req: Request, @Res() res: Response) {
-    if (req.session.user) {
-      return res.redirect('/keywords');
-    }
-
-    return {};
-  }
+  constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  async login(@Req() req: Request, @Res() res: Response, @Body() body: User) {
-    const user = await this.usersService.findOne(body?.email);
-
+  async login(@Body() loginDto: { email: string, password: string }) {
+    const user = await this.authService.validateUser(loginDto.email, loginDto.password);
     if (!user) {
-      return res.render('login', { error: 'Invalid credentials' });
+      throw new HttpException('Invalid credentials', HttpStatus.NOT_FOUND);
     }
+    return this.authService.login(user);
+  }
 
-    const isEqualPassword = await this.usersService.comparePasswords(body?.password, user.password)
+  @Post('register')
+  async register(@Body() user: User) {
+    const newUser = await this.authService.register(user);
+    return { message: 'Registration successful', user: newUser };
+  }
 
-    if (user && isEqualPassword) {
-      req.session.user = { userId: user.id, email: user.email };
-      return res.redirect('/keywords');
-    }
+  @Post('refresh')
+  async refresh(@Body() refreshDto: { refreshToken: string }) {
+    return this.authService.refreshTokens(refreshDto.refreshToken);
+  }
 
-    return res.render('login', { error: 'Invalid credentials' });;
+  @UseGuards(JwtAuthGuard)
+  @Post('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 }
