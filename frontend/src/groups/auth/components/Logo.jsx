@@ -1,12 +1,12 @@
 import React from "react";
-import Icon from "../../../base/components/Icon";
+import logo from "../../../base/assets/logo.svg";
 
 export default function Logo() {
   return (
     <div className="auth-logo-light">
       <div className="avatar-md profile-user-wid mb-3">
         <span className="avatar-title rounded-circle logo-bg">
-          <Icon icon="logo" className="rounded-circle" height="34" />
+          <img alt="logo" src={logo} style={{maxHeight: '80px'}}/>
         </span>
       </div>
     </div>

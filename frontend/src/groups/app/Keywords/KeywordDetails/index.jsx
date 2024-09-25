@@ -14,6 +14,7 @@ import ScrapingResultsService from "../../../../services/ScrapingResultService";
 import { KEYWORDS_GROUP_LINKS } from "../config";
 import ToastService from "../../../../services/ToastService";
 import ScrapingResultsList from "./components/ScrapingResultList";
+import { DATE_FULL_FORMAT_WITH_TIME, formatDate, formatISODate } from "../../../../base/helpers/date";
 
 
 export default function KeywordDetails() {
@@ -37,19 +38,24 @@ export default function KeywordDetails() {
 
     const { id } = useParams();
 
+    const loadKeyword = () => {
+        registerPromise(keywordsService.getKeywordById(id))
+          .then((data) => {
+              setKeyword(data);
+          });
+    }
+
     const startCheck = () => {
         scrapingResultsService.startScraping(id)
-            .then(() => {
-                toastService.success("Scraping started")
-            })
+          .then(() => {
+              toastService.success("Scraping started")
+              loadKeyword()
+          })
     }
 
     useEffect(() => {
         if (id) {
-            registerPromise(keywordsService.getKeywordById(id))
-                .then((data) => {
-                    setKeyword(data);
-                });
+            loadKeyword()
         }
     }, [id]);
 
@@ -72,9 +78,9 @@ export default function KeywordDetails() {
                 <section className="d-flex justify-content-between mb-4">
                     <ValueWithLabel value={keyword?.keyword} label="Keyword"/>
 
-                    <ValueWithLabel value={keyword?.createdAt} label="Created at"/>
+                    <ValueWithLabel value={formatISODate(keyword?.createdAt, DATE_FULL_FORMAT_WITH_TIME)} label="Created at"/>
 
-                    <ValueWithLabel value={keyword?.lastCheckAt} label="Last check date"/>
+                    <ValueWithLabel value={formatISODate(keyword?.lastCheckAt, DATE_FULL_FORMAT_WITH_TIME)} label="Last check date"/>
                 </section>
 
                 <section className="d-flex justify-content-between mb-4">

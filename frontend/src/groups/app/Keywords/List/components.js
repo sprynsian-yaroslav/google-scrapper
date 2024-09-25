@@ -37,7 +37,7 @@ export const TableHeader = ({ searchProvider, headerActions }) => {
                 className="biomarkers-search"
                 search={searchProvider?.getValue()}
                 onSearch={searchProvider.setValue}
-                placeholder="Search user segments..."
+                placeholder="Search keywords..."
             />
 
 
@@ -63,7 +63,6 @@ export const columns = [
         Header: "Keyword",
         accessor: "keyword",
         className: "bg-white",
-        canSort: true,
         width: 200,
         Cell: ({ value }) => {
             const { params } = useLocationQuery();
@@ -80,7 +79,6 @@ export const columns = [
         Header: "Context Words",
         accessor: "contextWords",
         className: "bg-white",
-        canSort: true,
         width: 250,
         Cell: ({ value }) => (
             <section style={{width: "250px", overflow: "hidden"}}>
@@ -94,7 +92,6 @@ export const columns = [
         Header: "Exclude Words",
         accessor: "excludeWords",
         className: "bg-white",
-        canSort: true,
         width: 250,
         Cell: ({ value }) => (
             <section style={{width: "250px", overflow: "hidden"}}>
@@ -108,7 +105,6 @@ export const columns = [
         Header: "Site Filter",
         accessor: "siteFilter",
         className: "bg-white",
-        canSort: true,
         width: 200,
         Cell: ({ value }) => (
             <section style={{width: "200px", overflow: "hidden"}}>

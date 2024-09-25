@@ -5,15 +5,17 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { User } from '../users/users.entity';
-import { jwtConstants } from './constants';
 import {JwtStrategy} from "./jwt.strategy";
+import * as dotenv from 'dotenv';
+
+console.log("process.env.SESSION_SECRET in auth module", process.env.SESSION_SECRET);
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
     PassportModule,
     JwtModule.register({
-      secret: jwtConstants.secret,
+      secret: process.env.SESSION_SECRET,
       signOptions: { expiresIn: '1h' },
     }),
   ],

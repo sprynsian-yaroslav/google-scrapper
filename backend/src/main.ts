@@ -1,8 +1,17 @@
+import * as path from 'path';
+import * as dotenv from 'dotenv';
+
+const envFilePath = path.join(__dirname, '../.env');
+dotenv.config({ path: envFilePath });
+
+// Логуємо, щоб переконатися, що змінні з .env підтягуються
+console.log("Loaded environment variables:", process.env);
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import {AppDataSource} from "./data-source";
-require('dotenv').config()
+import {createDefaultUser} from "./seeds/user.seed";
 
 async function bootstrap() {
   await AppDataSource.initialize();
@@ -15,7 +24,10 @@ async function bootstrap() {
   // Налаштування CORS для дозволу запитів з інших доменів
   app.enableCors();
 
-  await app.listen(process.env.PORT || 3000);
+  console.log("-----process.env------", process.env)
+    await app.listen(process.env.PORT || 3000);
+
+    await createDefaultUser();
   console.log('Application is running on: ' + await app.getUrl());
 }
 bootstrap();

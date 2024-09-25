@@ -1,12 +1,71 @@
 {
   "name": "google-scraper",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Google scraper app using Electron, React, and NestJS",
+  "author": "Yaroslav",
+  "main": "electron/main.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && npm run start",
+    "frontend-install": "cd frontend && npm install",
+    "backend-install": "cd backend && npm install",
+    "install-all": "npm install && npm run frontend-install && npm run backend-install " ,
+    "electron-dev": "wait-on http://localhost:3000 && wait-on tcp:3010 && electron .",
+    "build-frontend": "cd frontend && npm run build",
+    "build-backend": "cd backend && npm run build",
+    "build": "npm run build-frontend && npm run build-backend",
+    "package": "npm run build && electron-builder"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "build": {
+    "appId": "com.example.myapp",
+    "productName": "GoogleScrapper",
+    "directories": {
+      "buildResources": "assets"
+    },
+    "files": [
+      "frontend/build/**/*",
+      "backend/dist/**/*",
+      "electron/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "backend/dist",
+        "to": "backend",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "backend/node_modules",
+        "to": "backend/node_modules",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "backend/.env",
+        "to": "backend/.env"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "icon": "assets/icon.png"
+    }
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "concurrently": "^9.0.1",
+    "electron-is-dev": "^3.0.1",
+    "wait-on": "^8.0.1"
+  },
+  "devDependencies": {
+    "electron": "^32.1.2",
+    "electron-builder": "^25.0.5"
+  }
 }

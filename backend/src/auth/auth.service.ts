@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { User } from '../users/users.entity';
-import {jwtConstants} from "./constants";
+import process from "process";
 
 @Injectable()
 export class AuthService {
@@ -33,7 +33,7 @@ export class AuthService {
 
   async refreshTokens(refreshToken: string) {
     try {
-      const payload = this.jwtService.verify(refreshToken, { secret: jwtConstants.secret });
+      const payload = this.jwtService.verify(refreshToken, { secret: process.env.SESSION_SECRET });
       const user = await this.usersRepository.findOne({ where: { id: payload.sub } });
       if (!user) {
         throw new Error('User not found');

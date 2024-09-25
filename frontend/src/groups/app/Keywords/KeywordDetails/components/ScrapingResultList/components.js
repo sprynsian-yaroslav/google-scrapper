@@ -4,6 +4,7 @@ import TableSearch from "../../../../../../base/components/Table/tableSearch";
 
 import { useLocationQuery } from "../../../../../../base/hooks/useQueryString";
 import { useHighlight } from "../../../../../../base/hooks/useHighlight";
+import { DATE_FULL_FORMAT_WITH_TIME, formatISODate } from "../../../../../../base/helpers/date";
 
 export const SearchPlaceholder = () => (
     <>
@@ -45,7 +46,6 @@ export const columns = [
         Header: "Link",
         accessor: "link",
         className: "bg-white",
-        canSort: true,
         width: 400,
         Cell: ({ value }) => {
             const { params } = useLocationQuery();
@@ -53,7 +53,7 @@ export const columns = [
 
             return (
                 <section style={{width: "400px", overflow: "hidden"}}>
-                    <div {...decorateText(value)} className="text-truncate mb-0"/>
+                    <a href={value} target="_blank" rel="noreferrer">{value}</a>
                 </section>
             );
         }
@@ -62,7 +62,6 @@ export const columns = [
         Header: "Text",
         accessor: "text",
         className: "bg-white",
-        canSort: true,
         width: 400,
         Cell: ({ value }) => {
             const { params } = useLocationQuery();
@@ -79,15 +78,12 @@ export const columns = [
         Header: "Created at",
         accessor: "createdAt",
         className: "bg-white",
-        canSort: true,
         width: 400,
         Cell: ({ value }) => {
-            const { params } = useLocationQuery();
-            const { decorateText } = useHighlight(params.search || '');
 
             return (
                 <section style={{width: "400px", overflow: "hidden"}}>
-                    <div {...decorateText(value)} className="text-truncate mb-0"/>
+                    { formatISODate(value, DATE_FULL_FORMAT_WITH_TIME) }
                 </section>
             );
         }

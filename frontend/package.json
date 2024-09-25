@@ -2,6 +2,7 @@
   "name": "skote-react-hook",
   "version": "2.0.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@ckeditor/ckeditor5-build-decoupled-document": "^35.1.0",
     "@ckeditor/ckeditor5-react": "^5.0.2",

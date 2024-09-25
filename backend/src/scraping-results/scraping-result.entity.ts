@@ -17,4 +17,7 @@ export class ScrapingResult {
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
+
+  @Column('text', { nullable: true })
+  aiContext: string | null;
 }

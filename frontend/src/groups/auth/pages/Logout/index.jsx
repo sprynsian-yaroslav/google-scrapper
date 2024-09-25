@@ -5,7 +5,6 @@ import { useService } from "../../../../base/hooks/useService";
 import StorageService from "../../../../services/StorageService";
 import { AUTH_GROUP_LINKS } from "../../config";
 import AuthService from "../../../../services/AuthService";
-import SessionStorage from "../../../../services/SessionStorage";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -17,21 +16,9 @@ const Logout = () => {
    * @type {AuthService}
    */
   const authService = useService(AuthService);
-  /**
-   * @type {SessionStorage}
-   */
-  const storageSession = useService(SessionStorage);
 
   useEffect(() => {
-    console.log("adwdawdwad")
     navigate(AUTH_GROUP_LINKS.LINK_LOGIN, { replace: true })
-    if (storageSession.getSession()?.accessToken) {
-      authService.logout().finally(() => {
-        storage.clear()
-
-      });
-      return
-    }
     storage.clear();
   }, [storage, navigate, authService]);
 

@@ -5,6 +5,7 @@ import puppeteer, { Browser, Page } from 'puppeteer';
 import { ScrapingResult } from './scraping-result.entity';
 import { KeywordsService } from '../keywords/keywords.service';
 import { Keyword } from '../keywords/keywords.entity';
+import {AIService} from "../ai/ai.service";
 
 @Injectable()
 export class ScrapingResultsService {
@@ -38,6 +39,7 @@ export class ScrapingResultsService {
         private keywordService: KeywordsService,
         @InjectRepository(ScrapingResult)
         private scrapingResultsRepository: Repository<ScrapingResult>,
+        private aiService: AIService,
     ) {}
 
     async scrapeGoogle(keywordId: number): Promise<void> {
@@ -48,9 +50,6 @@ export class ScrapingResultsService {
             throw new Error('Keyword not found');
         }
 
-        await this.keywordService.update(keywordId, {
-            isCheck: true,
-        });
         console.log("2");
 
         this.browser = await puppeteer.launch(this.PUPPETEER_OPTIONS);
@@ -98,8 +97,6 @@ export class ScrapingResultsService {
         for (const link of allLinks) {
             let page: Page | null = null;
             try {
-                console.log("Link: ", link);
-
                 if (!this.browser) {
                     throw new Error("Browser is not initialized.");
                 }
@@ -110,7 +107,11 @@ export class ScrapingResultsService {
                 await page.goto(link, { waitUntil: 'networkidle2' });
 
                 const xpathQuery = this.constructXPathQuery(keyword.keyword);
+                const pageContent = await page.content();
                 const elementsWithKeyword = await page.$x(xpathQuery);
+
+                const prompt = AIService.generateGetContextByKeywordsPrompt(keyword.keyword, pageContent);
+                const aiContext = await this.aiService.analyzeContext(prompt);
 
                 for (const element of elementsWithKeyword) {
                     const fullText = await page.evaluate(el => el.textContent, element);
@@ -123,6 +124,7 @@ export class ScrapingResultsService {
                             link: fragmentURL,
                             keyword,
                             text: sentence,
+                            aiContext: aiContext
                         });
                     }
                 }
@@ -130,7 +132,7 @@ export class ScrapingResultsService {
                 console.error(`${link} not loaded`, e);
             } finally {
                 if (page) {
-                    await page.close(); // Закриваємо сторінку після завершення обробки
+                    await page.close();
                 }
             }
         }
@@ -140,10 +142,12 @@ export class ScrapingResultsService {
                                          link,
                                          keyword,
                                          text,
+                                         aiContext,
                                      }: {
         link: string;
         keyword: Keyword;
         text: string;
+        aiContext: string;
     }): Promise<ScrapingResult | null> {
 
         const existingResult = await this.scrapingResultsRepository.findOne({
@@ -153,13 +157,15 @@ export class ScrapingResultsService {
             return null;
         }
 
+
         const scrapingResult = this.scrapingResultsRepository.create({
             link,
             keyword,
             text,
+            aiContext
         });
 
-        console.log("Save scraping result", { link, keyword, text });
+        console.log("Save scraping result", { link, keyword, text, aiContext });
 
         return this.scrapingResultsRepository.save(scrapingResult);
     }

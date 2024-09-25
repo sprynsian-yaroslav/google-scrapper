@@ -3,13 +3,17 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { jwtConstants } from './constants';
 
+console.log("jwtConstants.secret", jwtConstants.secret)
+
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
+
     constructor() {
+        console.log("process.env.SESSION_SECRET", process.env.SESSION_SECRET);
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
-            secretOrKey: jwtConstants.secret,
+            secretOrKey: process.env.SESSION_SECRET,
         });
     }
 

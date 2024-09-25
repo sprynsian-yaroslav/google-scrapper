@@ -45,7 +45,11 @@ export class KeywordsService {
       throw new NotFoundException(`Keyword with ID ${id} not found`);
     }
 
+    console.log(updateKeywordDto)
+
     const updatedKeyword = { ...keyword, ...updateKeywordDto };
+
+    console.log(updatedKeyword)
 
     return this.keywordsRepository.save(updatedKeyword);
   }
